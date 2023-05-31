@@ -4,7 +4,6 @@ import proto.user_pb2_grpc as user_pb2_grpc
 import proto.user_pb2 as user_pb2
 
 
-
 class UserService:
     def __init__(self):
         host = os.environ.get('USER_HOST', '0.0.0.0:50051')

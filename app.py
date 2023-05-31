@@ -2,7 +2,7 @@ from flask import Flask, request
 
 from user_client import UserService
 from message import Message
-
+from greeting_client import GreetingService
 app = Flask(__name__)
 
 
@@ -21,15 +21,15 @@ def sign_up():
     return m.json()
 
 
-@app.route('/articles')
-def articles_list():
+@app.route('/greeting', methods=['POST'])
+def greeting():
     m = Message()
-    articles = ArticleService()
-
-    # sign up by using username and password
-    res = articles.article_list()
-    m.status = True
-    m.data = res
+    name = request.json.get('name')
+    greeting = request.json.get('greeting')
+    gr = GreetingService()
+    res = gr.greeting(name, greeting)
+    m.status = 200
+    m.message = res
     return m.json()
 
 
